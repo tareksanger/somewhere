@@ -16,16 +16,14 @@ exports.createCategory = (req, res) => {
   })
 
   category.save((err, category) => {
-    if (err) {
-      res.status(500).send({ msg: err });
-      return
-    }
-    res.send({ msg: 'Category Successfully added' })
+    if (err) res.status(500).send({ msg: err });
+    return res.send({ category })
   })
 }
 
 exports.deteteCategory = (req, res) => {
   FoodCategory.findOne({ _id: req.params.id }, (err, category) => {
+    if (err) return res.status(500).send({ msg: err })
     if (category.items) {
       for (let item of category.items) {
         FoodItem.deleteOne({ '_id': item }, err => {
@@ -36,7 +34,7 @@ exports.deteteCategory = (req, res) => {
   }).then(category => {
     FoodCategory.deleteOne({ '_id': category.id }, err => {
       if (err) return res.status(500).send({ msg: err })
-      res.send({ msg: 'Deleted' })
+      return res.send({ msg: 'Deleted' })
     })
   })
 
@@ -53,7 +51,7 @@ exports.getCategorys = (req, res) => {
         data[c.name] = c
       }
 
-      res.send(data)
+      return res.send(data)
     })
 }
 
@@ -68,31 +66,23 @@ exports.getCategorys = (req, res) => {
 exports.createFoodItem = (req, res) => {
 
   FoodCategory.findOne({ name: req.body.category }, (err, category) => {
-    if (err) {
-      res.status(500).send({ msg: err })
-      return
-    }
+    if (err) return res.status(500).send({ msg: err })
+
     const item = new FoodItem({
       name: req.body.name,
       description: req.body.description,
       price: req.body.price
     })
 
-    item.save((err, item) => {
-      if (err) {
-        res.status(200).send({ msg: err })
-        return;
-      }
-
+    item.save(async (err, item) => {
+      if (err) return res.status(200).send({ msg: err })
+        
       if (!category.items) category.items = []
+      
       category.items.push(item)
       category.save(err => {
-        if (err) {
-          res.status(500).send({ msg: err })
-          return
-        }
-
-        res.send(item)
+        if (err) return res.status(500).send({ msg: err })
+        return res.send(item)
       })
     })
   })
@@ -106,7 +96,7 @@ exports.updateFoodItem = (req, res) => {
   }
   FoodItem.findOneAndUpdate({ _id: req.params.id }, newData, err => {
     if (err) return res.status(500).send({ msg: err })
-    res.send({ msg: "Food Item updated." })
+    return res.send({ msg: "Food Item updated." })
   })
 }
 
@@ -114,7 +104,7 @@ exports.updateFoodItem = (req, res) => {
 exports.deleteFoodItem = (req, res) => {
   FoodItem.deleteOne({ '_id': req.params.id }, (err) => {
     if (err) return res.status(500).send({ msg: err })
-    res.send({ msg: "Food Item has been deleted." })
+    return res.send({ msg: "Food Item has been deleted." })
   })
 }
 

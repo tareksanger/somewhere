@@ -29,7 +29,8 @@ const MenuDataProvider = ({ url, tableColumns, children, ...props }) => {
   }
 
   const addMenuItem = (resolve, reject, category, newData) => {
-    let data = { ...newData, 'category': category }
+    let data = { ...newData, category }
+    console.log(data)
     if (!newData.description) data.description = ''
     return client(URL + url, { data })
     .then(response => {
@@ -74,7 +75,7 @@ const MenuDataProvider = ({ url, tableColumns, children, ...props }) => {
     return client(URL + url + '/category', {data, config }).then(response => {
       if (response.status === 200) {
         menuData[category] = {
-          name: category,
+          ...response.body.category,
           items: []
         }
         setMenuData({ ...menuData })
@@ -89,11 +90,7 @@ const MenuDataProvider = ({ url, tableColumns, children, ...props }) => {
   const deleteCategory = (category_id) => {
     let config = { method: 'DELETE' }
     return client(URL + url + '/category/' + category_id, { config }).then(response => {
-      if (response.status === 200) {
-        refresh()
-      }
-
-      if (response.body.msg) alert(response.body.msg)
+      refresh()
     })
     .catch(err => {
       console.log(err)

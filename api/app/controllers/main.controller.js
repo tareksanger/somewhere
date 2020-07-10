@@ -28,7 +28,7 @@ exports.getFoodMenu = (req, res) => {
 
     let food = {}
     for (let c of foodCategories) food[c.name] = c
-    res.send(food)
+    return res.send(food)
 
   })
 
@@ -45,7 +45,7 @@ exports.getDrinks = (req, res) => {
           beer,
           drinks,
         }
-        res.send(data)
+        return res.send(data)
       })
 
 
@@ -56,7 +56,7 @@ exports.getDrinks = (req, res) => {
   exports.getWine = (req, res) => {
     WineCategory.find({}).populate('items', '-__v').exec((err, wine) => {
       if (err) return res.status(500).send({ msg: err })
-      res.send(wine)
+      return res.send(wine)
     })
   }
 

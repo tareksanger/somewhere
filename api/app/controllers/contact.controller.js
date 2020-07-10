@@ -7,7 +7,7 @@ const Address = db.address
 exports.getContact = (req, res) => {
   Contact.findOne({}, (err, contact) => {
     if (err) return res.status(500).send({ msg: err })
-    res.send(contact)
+    return res.send(contact)
   })
 
 }
@@ -19,7 +19,7 @@ exports.updateContact = (req, res) => {
   }
   Contact.findOneAndUpdate({ _id: req.params.id }, newData, err => {
     if (err) return res.status(500).send({ msg: err })
-    res.send({ msg: "Contact Updated!" })
+    return res.send({ msg: "Contact Updated!" })
   })
 }
 
@@ -33,6 +33,6 @@ exports.updateAddress = (req, res) => {
   }
   Address.findOneAndUpdate({ _id: req.params.id }, newData, err => {
     if (err) return res.status(500).send({ msg: err })
-    res.send({ msg: "Address Updated!" })
+    return res.send({ msg: "Address Updated!" })
   })
 }

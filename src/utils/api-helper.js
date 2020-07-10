@@ -18,8 +18,7 @@ const client = async (subdir, { data, config } = {}) => {
     method: data ? 'POST' : 'GET',
     body: data ? JSON.stringify(data) : undefined,
     headers: new Headers({
-      // Authorization: token ? 'Bearer' + token : undefined,
-      // "Access-Control-Allow-Origin": '*',
+      
       'Accept': 'application/json',
       'x-access-token': user ? user.token : undefined,
       'Content-Type': data ? 'application/json' : undefined,

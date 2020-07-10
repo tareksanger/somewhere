@@ -16,12 +16,13 @@ exports.createCategory = (req, res) => {
   category.save((err, category) => {
     if (err) return res.status(500).send({ msg: err });
 
-    res.send({ msg: 'Category Successfully added' })
+    return res.send({ category })
   })
 }
 
 exports.deteteCategory = (req, res) => {
-  WineCategory.findOne({ _id: req.params.id }, (err, category) => {
+  WineCategory.findOne({ _id: req.params.id }, async (err, category) => {
+    if (err) return res.status(500).send({ msg: err })
     if (category.items) {
       for (let item of category.items) {
         Wine.deleteOne({ '_id': item }, err => {
@@ -32,7 +33,7 @@ exports.deteteCategory = (req, res) => {
   }).then(category => {
     WineCategory.deleteOne({ '_id': category.id }, err => {
       if (err) return res.status(500).send({ msg: err })
-      res.send({ msg: 'Deleted' })
+      return res.send({ msg: 'Deleted' })
     })
   })
 
@@ -47,7 +48,7 @@ exports.getCategorys = (req, res) => {
       let data = {}
       for (let c of categorys) data[c.name] = c
 
-      res.send(data)
+      return res.send(data)
     })
 }
 
@@ -62,10 +63,8 @@ exports.getCategorys = (req, res) => {
 exports.createWine = (req, res) => {
 
   WineCategory.findOne({ name: req.body.category }, (err, category) => {
-    if (err) {
-      res.status(500).send({ msg: err })
-      return
-    }
+    if (err)  return res.status(500).send({ msg: err })
+      
     const item = new Wine({
       name: req.body.name,
       type: req.body.type,
@@ -75,7 +74,7 @@ exports.createWine = (req, res) => {
       priceBottle: req.body.priceBottle,
     })
 
-    item.save((err, item) => {
+    item.save(async (err, item) => {
       if (err) return res.status(200).send({ msg: err })
 
       if (!category.items) category.items = []
@@ -83,7 +82,7 @@ exports.createWine = (req, res) => {
       category.save(err => {
         if (err) return res.status(500).send({ msg: err })
 
-        res.send(item)
+        return res.send(item)
       })
     })
   })
@@ -100,7 +99,7 @@ exports.updateWine = (req, res) => {
   }
   Wine.findOneAndUpdate({ _id: req.params.id }, newData, err => {
     if (err) return res.status(500).send({ msg: err })
-    res.send({ msg: "Food Item updated." })
+    return res.send({ msg: "Food Item updated." })
   })
 }
 
@@ -108,7 +107,7 @@ exports.updateWine = (req, res) => {
 exports.deleteWine = (req, res) => {
   Wine.deleteOne({ '_id': req.params.id }, (err) => {
     if (err) return res.status(500).send({ msg: err })
-    res.send({ msg: "Food Item has been deleted." })
+    return res.send({ msg: "Food Item has been deleted." })
   })
 }
 

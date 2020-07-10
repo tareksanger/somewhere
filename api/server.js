@@ -59,29 +59,23 @@ db.mongoose
 
 app.use(express.static(path.join(__dirname, '../build')))
 
+app.use(function(req, res, next) {
+  res.header(
+    "Access-Control-Allow-Headers",
+    "x-access-token, Origin, Content-Type, Accept"
+  );
+  next();
+});
 // routes
+
 require("./app/routes/main.routes")(app);
 require("./app/routes/auth.routes")(app);
-require("./app/routes/user.routes")(app);
 require("./app/routes/dashboard.routes")(app); 
-
 require("./app/routes/contact.routes")(app);
-
-
 require("./app/routes/food.routes")(app);
 require("./app/routes/drink.routes")(app);
 require("./app/routes/beer.routes")(app);
 require("./app/routes/wine.routes")(app);
-
-
-// If no API routes are hit, send the React app
-// app.use(function(req, res) {
-// 	res.sendFile(path.join(__dirname, '../build'));
-// });
-
-// app.get('*', (req, res) => {
-//     res.sendFile(path.join(__dirname, '../build'))
-// })
 
 app.get("*", (req, res) => {
   res.sendFile(path.join(__dirname, "../build", "index.html"));
