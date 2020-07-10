@@ -57,9 +57,9 @@ db.mongoose
   });
 
 // simple route
-app.get("/", (req, res) => {
-  res.json({  msg: "Welcome to Somewhere." });
-});
+// app.get("/", (req, res) => {
+//   res.json({  msg: "Welcome to Somewhere." });
+// });
 
 // routes
 require("./app/routes/main.routes")(app);
