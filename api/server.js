@@ -75,13 +75,17 @@ require("./app/routes/wine.routes")(app);
 
 
 // If no API routes are hit, send the React app
-app.use(function(req, res) {
-	res.sendFile(path.join(__dirname, '../build'));
-});
+// app.use(function(req, res) {
+// 	res.sendFile(path.join(__dirname, '../build'));
+// });
 
 // app.get('*', (req, res) => {
 //     res.sendFile(path.join(__dirname, '../build'))
 // })
+
+app.get("*", (req, res) => {
+  res.sendFile(path.join(__dirname, "../build", "index.html"));
+});
 
 
 // set port, listen for requests

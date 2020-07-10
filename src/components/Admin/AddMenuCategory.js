@@ -41,8 +41,6 @@ const AddMenuCategory = () => {
       </Grid>
     </div >
   )
-
-
 }
 
 
