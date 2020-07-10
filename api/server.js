@@ -39,10 +39,14 @@ const Role = db.role;
 const User = db.user
 
 db.mongoose
-  .connect(`mongodb://${dbConfig.HOST}:${dbConfig.PORT}/${dbConfig.DB}`, {
+  .connect(`mongodb://heroku_7lddlv0h:9vq2bo700eckaq4f1727podhuq@ds141078.mlab.com:41078/heroku_7lddlv0h`, {
     useNewUrlParser: true,
     useUnifiedTopology: true
   })
+  // .connect(`mongodb://${dbConfig.HOST}:${dbConfig.PORT}/${dbConfig.DB}?retryWrites=true&w=majority`, {
+  //   useNewUrlParser: true,
+  //   useUnifiedTopology: true
+  // })
   .then(() => {
     console.log("Successfully connect to MongoDB.");
     initial();
