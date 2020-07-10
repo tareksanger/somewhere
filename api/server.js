@@ -57,6 +57,9 @@ db.mongoose
   });
 
 
+// ADD THIS LINE
+app.use(express.static('../build'));
+
 // routes
 require("./app/routes/main.routes")(app);
 require("./app/routes/auth.routes")(app);
