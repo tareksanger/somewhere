@@ -56,10 +56,6 @@ db.mongoose
     process.exit();
   });
 
-// simple route
-// app.get("/", (req, res) => {
-//   res.json({  msg: "Welcome to Somewhere." });
-// });
 
 // routes
 require("./app/routes/main.routes")(app);
@@ -76,10 +72,15 @@ require("./app/routes/beer.routes")(app);
 require("./app/routes/wine.routes")(app);
 
 
-app.use(express.static(path.join(__dirname, '../build')))
-app.get('*', (req, res) => {
-    res.sendFile(path.join(__dirname, '../build'))
-})
+// If no API routes are hit, send the React app
+app.use(function(req, res) {
+	res.sendFile(path.join(__dirname, '../build/index.html'));
+});
+
+// app.use(express.static(path.join(__dirname, '../build')))
+// app.get('*', (req, res) => {
+//     res.sendFile(path.join(__dirname, '../build'))
+// })
 
 
 // set port, listen for requests
