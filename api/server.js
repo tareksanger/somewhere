@@ -59,6 +59,10 @@ db.mongoose
 
 app.use(express.static(path.join(__dirname, '../build')))
 
+app.get("*", (req, res) => {
+  res.sendFile(path.join(__dirname, "../build", "index.html"));
+});
+
 // routes
 require("./app/routes/main.routes")(app);
 require("./app/routes/auth.routes")(app);
@@ -82,10 +86,6 @@ require("./app/routes/wine.routes")(app);
 // app.get('*', (req, res) => {
 //     res.sendFile(path.join(__dirname, '../build'))
 // })
-
-app.get("*", (req, res) => {
-  res.sendFile(path.join(__dirname, "../build", "index.html"));
-});
 
 
 // set port, listen for requests
