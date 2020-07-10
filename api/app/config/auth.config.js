@@ -1,0 +1,3 @@
+module.exports = {
+  secret: "AF95LXVTRWR69B952MG972M55MHGE2KG346B6"
+};

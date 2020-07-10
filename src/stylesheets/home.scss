@@ -1,0 +1,16 @@
+$midnight-Blue: #273848;
+$tricorn-black: #303030;
+$sconce-gold: #986f31;
+$essential-gray: #d4d3ce;
+
+$lightgold1:#f5d4a4;
+$lightgold: rgba(245, 208, 169, 1);
+$darkgold: rgba(197, 133, 104, 1);
+
+$gold: linear-gradient(to right, $lightgold1, $sconce-gold);
+
+html {
+  background-color: $midnight-Blue;
+  // padding-bottom: 20px;
+
+}
