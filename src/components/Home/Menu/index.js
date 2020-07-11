@@ -12,6 +12,8 @@ const Menu = () => {
   const [showFood, setShowFood] = useState(true)
   const [showWine, setShowWine] = useState(true)
 
+  const showWineMenu = () => (!showFood && showWine)
+  const showBeerMenu = () => (!showFood && !showWine)
 
   const handleFoodClick = (e) => {
     e.preventDefault()
@@ -70,14 +72,14 @@ const Menu = () => {
             </div>
 
             <div>
-              <Fade collapse when={(!showFood && showWine)} >
+              <Fade collapse when={!showFood && showWine} >
                 <Paper className={"s-menu__paper "} elevation={3}>
                   <WineMenu />
                 </Paper>
               </Fade>
             </div>
             <div>
-              <Fade collapse when={(!showFood && !showWine)} >
+              <Fade collapse when={!showFood && !showWine} >
                 <Paper className={"s-menu__paper "} elevation={3}>
                   <DrinkMenu />
                 </Paper>
