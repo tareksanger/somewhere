@@ -62,7 +62,7 @@ exports.getCategorys = (req, res) => {
 
 exports.createWine = (req, res) => {
 
-  WineCategory.findOne({ name: req.body.category }, (err, category) => {
+  WineCategory.findOne({ name: req.body.category }, async(err, category) => {
     if (err)  return res.status(500).send({ msg: err })
       
     const item = new Wine({

@@ -61,7 +61,7 @@ exports.getCategorys = (req, res) => {
 
 exports.createDrink = (req, res) => {
 
-  DrinkCategory.findOne({ name: req.body.category }, (err, category) => {
+  DrinkCategory.findOne({ name: req.body.category }, async(err, category) => {
     if (err) return res.status(500).send({ msg: err })
 
     const item = new Drink({
