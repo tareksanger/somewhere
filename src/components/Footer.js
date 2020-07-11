@@ -16,72 +16,73 @@ export default function Footer({ data, ...props }) {
 
 
   return (
-    <footer className="s-footer" id="contact">
+    <div></div>
+    // <footer className="s-footer" id="contact">
 
-      <div className="right-vert-line" />
-
-
-
-      <div className="row s-footer__main">
-
-        <div className="column large-5">
-          <div className="footer-contacts">
-
-            {/* <div className="footer-contact-block">
-              <h5 className="footer-contact-block__header">
-                Email
-                            </h5>
-              <p className="footer-contact-block__content">
-                <a href={"mailto:" + data.email}>{data.email}</a>
-              </p>
-            </div> */}
-
-
-            {/* <div className="footer-contact-block" >
-              <h5 className="footer-contact-block__header">Phone</h5>
-              <p className="footer-contact-block__content">
-                <a href={"tel:" + data.phone}>{data.phone}</a>
-              </p>
-            </div> */}
+    //   <div className="right-vert-line" />
 
 
 
-            {/* <br />
+    //   <div className="row s-footer__main">
 
-            <div className="footer-contact-block">
+    //     <div className="column large-5">
+    //       <div className="footer-contacts">
 
-              <h5 className="footer-contact-block__header">
-                Social
-                            </h5>
+    //         <div className="footer-contact-block">
+    //           <h5 className="footer-contact-block__header">
+    //             Email
+    //                         </h5>
+    //           <p className="footer-contact-block__content">
+    //             <a href={"mailto:" + data.email}>{data.email}</a>
+    //           </p>
+    //         </div>
+
+
+    //         <div className="footer-contact-block" >
+    //           <h5 className="footer-contact-block__header">Phone</h5>
+    //           <p className="footer-contact-block__content">
+    //             <a href={"tel:" + data.phone}>{data.phone}</a>
+    //           </p>
+    //         </div>
 
 
 
-              <ul className="footer-contact-block__list">
-                {createNetwork(data.social)}
-              </ul>
+    //         <br />
 
-            </div> */}
-          </div>
-        </div>
-      </div>
+    //         <div className="footer-contact-block">
 
-      <div className="row s-footer__bottom">
-        <div className="column large-full ss-copyright ">
-          <span>© Somewhere Dine Bar</span>
-        </div>
-        {/* <div className="column large-full ss-copyright">
-          <span>Design by Tarek Sanger</span>
-        </div> */}
+    //           <h5 className="footer-contact-block__header">
+    //             Social
+    //                         </h5>
 
-        {/* 
-        <div className="ss-go-top">
-          <a title="Back to Top" href='/#' onClick={scroll.scrollToTop}>
-            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M12 0l8 9h-6v15h-4v-15h-6z" /></svg>
-          </a>
-        </div> */}
-      </div>
 
-    </footer>
+
+    //           <ul className="footer-contact-block__list">
+    //             {createNetwork(data.social)}
+    //           </ul>
+
+    //         </div>
+    //       </div>
+    //     </div>
+    //   </div>
+
+    //   <div className="row s-footer__bottom">
+    //     <div className="column large-full ss-copyright ">
+    //       <span>© Somewhere Dine Bar</span>
+    //     </div>
+    //     <div className="column large-full ss-copyright">
+    //       <span>Design by Tarek Sanger</span>
+    //     </div>
+
+        
+    //     <div className="ss-go-top">
+    //       <a title="Back to Top" href='/#' onClick={scroll.scrollToTop}>
+    //         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M12 0l8 9h-6v15h-4v-15h-6z" /></svg>
+    //       </a>
+    //     </div>
+    //   </div>
+
+    // </footer>
 
   )
 }
