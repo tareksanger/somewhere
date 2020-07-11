@@ -49,7 +49,7 @@ const Home = () => {
       <Navbar sections={data.about ? ['about', 'menu'] : ['menu']} />
       {/* --------------- Header Section --------------- */}
       <section id='hero' className='s-hero targert-section'
-        style={{ backgroundImage: "url('images/background/cement_texture.jpg')", backgroundSize: 'cover', backgroundPosition: "center center", backgroundAttachment: 'fixed' }}
+        style={{ backgroundImage: "url('images/background/cement_texture.jpg')", backgroundSize: 'cover', backgroundPosition: "center center", backgroundAttachment: 'fixed', overflow: 'hidden' }}
       >
         <div className="row hero-content">
           <div className="column large-full">

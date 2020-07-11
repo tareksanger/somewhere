@@ -65,7 +65,7 @@ exports.getCategorys = (req, res) => {
 
 exports.createFoodItem = (req, res) => {
 
-  FoodCategory.findOne({ name: req.body.category }, (err, category) => {
+  FoodCategory.findOne({ name: req.body.category }, async(err, category) => {
     if (err) return res.status(500).send({ msg: err })
 
     const item = new FoodItem({

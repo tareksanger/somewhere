@@ -752,50 +752,50 @@ html {
 }
 
 @media screen and (max-width:1700px) {
-  // .hero-content {
-  //   max-width: 1200px;
-  // }
+  .hero-content {
+    max-width: 1200px;
+  }
 
 }
 
 @media screen and (max-width:1500px) {
-  // .hero-content {
-  //   max-width: 1000px;
-  // }
+  .hero-content {
+    max-width: 1000px;
+  }
 
 }
 
 @media screen and (max-width:1300px) {
-  // .hero-content {
-  //   max-width: 1200px;
-  // }
+  .hero-content {
+    max-width: 1200px;
+  }
 
-  // .hero-content h1 {
-  //   font-size: 6rem;
-  //   padding-top: 3.2rem;
-  // }
+  .hero-content h1 {
+    font-size: 6rem;
+    padding-top: 3.2rem;
+  }
 
-  // .hero-content h1::before {
-  //   width: 6rem;
-  //   top: 0;
-  //   left: 0;
-  // }
+  .hero-content h1::before {
+    width: 6rem;
+    top: 0;
+    left: 0;
+  }
 
 }
 
 @media screen and (max-width:1200px) {
-  // .hero-scroll {
-  //   right: 6rem;
-  // }
+  .hero-scroll {
+    right: 6rem;
+  }
 
-  // .hero-scroll::after {
-  //   height: 8rem;
-  // }
+  .hero-scroll::after {
+    height: 8rem;
+  }
 
-  // .hero-scroll .scroll-link {
-  //   height: 6rem;
-  //   width: 6rem;
-  // }
+  .hero-scroll .scroll-link {
+    height: 6rem;
+    width: 6rem;
+  }
 
 }
 
@@ -957,8 +957,9 @@ html {
     padding: 1rem;
     font-family: 'Raleway', sans-serif;
     font-weight: 400;
-    font-size: 4rem;
+    font-size: 3rem;
     text-align: center;
+    white-space: nowrap;
     color: $essential-gray;
     cursor: pointer;
 
