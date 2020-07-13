@@ -14,7 +14,7 @@ const FoodItems = () => {
       tableColumns={[
         { title: 'ID', field: '_id', hidden: true },
         { title: 'Name', field: 'name' },
-        { title: 'Description', field: 'description', initialEditValue: '' },
+        { title: 'Description', field: 'description'},
         { title: 'Price', field: 'price', type: 'currency'}
       ]}>
       <FoodContainer />

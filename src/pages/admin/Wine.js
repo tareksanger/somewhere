@@ -12,7 +12,7 @@ const Wine = () => {
       tableColumns={[
         { title: 'ID', field: '_id', hidden: true },
         { title: 'Name', field: 'name' },
-        { title: 'Description', field: 'description', initialEditValue: ' ' },
+        { title: 'Description', field: 'description'},
         { title: '5oz', field: 'price5oz', type: 'currency' },
         { title: '9oz', field: 'price9oz', type: 'currency'},
         { title: 'Bottle', field: 'priceBottle', type: 'currency'}

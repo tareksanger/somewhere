@@ -58,7 +58,7 @@ function App() {
 
   const handleResize = function () {
     $('#hero').css({ 'height': $(window).height() });
-    // $('body').css({ 'width': $(window).width() })
+    $('body').css({ 'width': $(window).width() })
     // above 900px
     if (window.matchMedia('(min-width: 901px)').matches) {
       if ($siteBody.hasClass("menu-is-open")) $siteBody.removeClass("menu-is-open");
@@ -69,7 +69,7 @@ function App() {
 
   useEffect(() => {
     $('#hero').css({ 'height': $(window).height() });
-    // $('body').css({ 'width': $(window).width() })
+    $('body').css({ 'width': $(window).width() })
 
     window.addEventListener('scroll', handleScroll)
 

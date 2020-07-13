@@ -1,7 +1,7 @@
 const mongoose = require("mongoose");
 
 
-const Contact = mongoose.model(
+const Address = mongoose.model(
   "Address",
   new mongoose.Schema({
     street: { type : String , unique : true, required : true, dropDups: true },
@@ -12,4 +12,4 @@ const Contact = mongoose.model(
   })
 )
 
-module.exports = Contact
+module.exports = Address

@@ -8,13 +8,14 @@ import { useAuth } from '../context/AuthContext'
 // import logo from '../somewhere.svg'
 import { client } from '../utils/api-helper'
 import { Loading } from '.'
+import { Typography } from '@material-ui/core'
 
 
 const Home = () => {
   const { maintenance, setMaintenance, setLoading, isLoading } = useAuth()
-  const [data, setData] = useState({})
+  const [data, setData] = useState({contact: { address: {} }, about: {}, social: null})
   // let history = useHistory()
-  
+
 
   useEffect(() => {
     setLoading(true)
@@ -24,11 +25,11 @@ const Home = () => {
         if (response.body.maintenance)
           setMaintenance(true)
         else {
-          // console.log(response.body)
+          console.log(response.body)
           setData(response.body)
         }
       }
-    }).then(()=> {
+    }).then(() => {
       setTimeout(() => {
         setLoading(false)
       }, 1500)
@@ -42,22 +43,23 @@ const Home = () => {
     })
   }
 
-  if(isLoading) return <Loading/>
+  if (isLoading) return <Loading />
 
   return (
-    <div className="App">
-      <Navbar sections={data.about ? ['about', 'menu'] : ['menu']} />
+    <>
+      <Navbar sections={data.about.show ? ['about', 'menu'] : ['menu']} />
       {/* --------------- Header Section --------------- */}
-      <section id='hero' className='s-hero targert-section'
-        style={{ backgroundImage: "url('images/background/cement_texture.jpg')", backgroundSize: 'cover', backgroundPosition: "center center", backgroundAttachment: 'fixed', overflow: 'hidden' }}
+      <section id='hero' className='s-hero targert-section container-fluid'
+        style={{ backgroundImage: "url('images/background/cement_texture.jpg')", backgroundSize: 'cover', backgroundPosition: "center center", }}
       >
         <div className="row hero-content">
-          <div className="column large-full">
+          <div className="col-lg ">
             <Logo fill={"#273848"} />
-            <h1>{data.contact ? data.contact.address.street + ', ' + data.contact.address.city : ''}</h1>
+            <h2>{data.contact ? data.contact.address.street + ', ' + data.contact.address.city : ''}</h2>
+            {data.social ?
             <ul className="hero-social">
-              {data.social ? createNetwork(data.social) : <></>}
-            </ul>
+               {createNetwork(data.social)} 
+            </ul>: <></>}
           </div>
 
         </div>
@@ -65,16 +67,22 @@ const Home = () => {
       </section>
 
       {/* --------------- About Section --------------- */}
-      {data.about ?
+      {
+        data.about.show ? 
+
         <section id="about" className="s-about">
           <div className="row s-about__content">
-            <div className="column ">
-              <p>{data.about}</p>
+            <div className="container">
+              <div className='row'>
+                <Typography paragraph varient="body1">
+                  {data.about.text}
+                </Typography>
+              </div>
+
             </div>
           </div>
-
         </section>
-        :
+        : 
         <></>
       }
 
@@ -83,9 +91,9 @@ const Home = () => {
       {/* --------------- Menu Section --------------- */}
       <Menu />
 
-      <Footer/>
+      <Footer data={data.contact}/>
 
-    </div>
+    </>
   )
 }
 

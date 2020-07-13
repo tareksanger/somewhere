@@ -3,7 +3,10 @@ import ReactDOM from 'react-dom';
 import { BrowserRouter } from "react-router-dom";
 import { AuthProvider } from './context/AuthContext'
 import './index.scss';
-import './stylesheets/base.scss';
+// import './stylesheets/base.scss';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import 'bootstrap/dist/js/bootstrap.bundle.min';
+
 import App from './App';
 // import * as serviceWorker from './serviceWorker';
 

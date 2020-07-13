@@ -62,27 +62,22 @@ exports.getCategorys = (req, res) => {
 
 
 exports.createDrink = (req, res) => {
+  const newBeer = new Drink({
+    name: req.body.name,
+    type: req.body.type,
+    description: req.body.description,
+    price: req.body.price
+  })
 
-  Beer.findOne({name: req.body.category }, async(err, category) => {
+  newBeer.save((err, new_beer )=> {
     if (err) return res.status(500).send({ msg: err })
-  
-    const item = new Drink({
-      name: req.body.name,
-      type: req.body.type,
-      description: req.body.description,
-      price: req.body.price
-    })
 
-    item.save(async(err, item) => {
-      if (err) return res.status(200).send({ msg: err })
-        if (!category.items) category.items = []
-        category.items.push(item)
-        category.save(err => {
-          if (err) return res.status(500).send({ msg: err })
-
-          return res.send(item)
-        })
-      
+    Beer.findOneAndUpdate({name: req.body.category}, {$push: {items: new_beer}}, (err, category)=> {
+      if (err) {
+        Drink.findByIdAndDelete({_id: new_beer._id}, error => res.status(500).send({ msg: error }))
+        return res.status(500).send({ msg: err })
+      }
+      return res.send(new_beer)
 
     })
   })

@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react'
-import { Container, Grid, TextField, Typography, makeStyles, Button } from '@material-ui/core'
+import { Grid, TextField, Typography, makeStyles, Button } from '@material-ui/core'
 import { client } from '../utils/api-helper'
 
-const UpdateContact = () => {
-  let classes = useStyles()
+const UpdateAddress = () => {
+  const classes = useStyles()
 
   let [street, setStreet] = useState('')
   let [city, setCity] = useState('')
@@ -16,6 +16,9 @@ const UpdateContact = () => {
         setStreet(response.body.street)
         setCity(response.body.city)
       }
+    })
+    .catch(err => {
+      console.error(err)
     })
   }, [])
 
@@ -63,4 +66,4 @@ const useStyles = makeStyles((theme) => ({
 }))
 
 
-export default UpdateContact
+export default UpdateAddress

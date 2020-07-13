@@ -37,16 +37,17 @@ const Settings = db.settings;
 const Address = db.address;
 const Role = db.role;
 const User = db.user
+const About = db.about;
 
 db.mongoose
-  .connect(`mongodb://heroku_7lddlv0h:9vq2bo700eckaq4f1727podhuq@ds141078.mlab.com:41078/heroku_7lddlv0h`, {
-    useNewUrlParser: true,
-    useUnifiedTopology: true
-  })
-  // .connect(`mongodb://${dbConfig.HOST}:${dbConfig.PORT}/${dbConfig.DB}?retryWrites=true&w=majority`, {
+  // .connect(`mongodb://heroku_7lddlv0h:9vq2bo700eckaq4f1727podhuq@ds141078.mlab.com:41078/heroku_7lddlv0h`, {
   //   useNewUrlParser: true,
   //   useUnifiedTopology: true
   // })
+  .connect(`mongodb://${dbConfig.HOST}:${dbConfig.PORT}/${dbConfig.DB}?retryWrites=true&w=majority`, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true
+  })
   .then(() => {
     console.log("Successfully connect to MongoDB.");
     initial();
@@ -70,6 +71,7 @@ app.use(function(req, res, next) {
 require("./app/routes/main.routes")(app);
 require("./app/routes/auth.routes")(app);
 require("./app/routes/dashboard.routes")(app); 
+require("./app/routes/about.routes")(app); 
 require("./app/routes/contact.routes")(app);
 require("./app/routes/food.routes")(app);
 require("./app/routes/drink.routes")(app);
@@ -92,6 +94,15 @@ app.listen(PORT, () => {
 
 
 function initial() {
+  About.estimatedDocumentCount((err, count)=> {
+    if(!err && count === 0)
+    new About({text: 'Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem.'}).save(
+    err => {
+      if (err) console.log('error', err)
+      console.log(`about added to db`)
+    })
+  })
+
   User.estimatedDocumentCount((err, count) => {
     if (!err && count === 0) {
       // TODO : Change maintenance to false before production launch

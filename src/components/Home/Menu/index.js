@@ -1,7 +1,7 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import React, { useState } from 'react'
 import Fade from 'react-reveal/Fade'
-import { Paper, makeStyles, Grid } from '@material-ui/core'
+import { Paper, makeStyles, Grid, Container } from '@material-ui/core'
 
 import FoodMenu from './FoodMenu'
 import WineMenu from './WineMenu'
@@ -12,8 +12,8 @@ const Menu = () => {
   const [showFood, setShowFood] = useState(true)
   const [showWine, setShowWine] = useState(true)
 
-  const showWineMenu = () => (!showFood && showWine)
-  const showBeerMenu = () => (!showFood && !showWine)
+  const showWineMenu = !showFood && showWine
+  const showBeerMenu = !showFood && !showWine
 
   const handleFoodClick = (e) => {
     e.preventDefault()
@@ -37,59 +37,44 @@ const Menu = () => {
 
   return (
     <section id="menu" className="s-menu">
-      <div className="row s-menu__content">
-        <article className="column">
-
+      <div className="s-menu__content container-fluid">
+        <div>
           <div className="menu-toggle">
-            <a className={(showFood ? "active" : "") + " s-menu__btn"} onClick={handleFoodClick}>
-              Food
-                 </a>
-
-            <a className={(!showFood ? "active" : "") + " s-menu__btn"} onClick={handleDrinkClick}>
-              Drinks
-                </a>
+            <a className={(showFood ? "active" : "") + " s-menu__btn"} onClick={handleFoodClick}>Food</a>
+            <a className={(!showFood ? "active" : "") + " s-menu__btn"} onClick={handleDrinkClick}>Drinks</a>
           </div>
-
-
-          <div className="drink-toggle row">
+          <div className="menu-toggle drink-toggle row">
             <Fade top collapse when={!showFood}>
-              <a className={(showWine ? "active" : "") + " s-menu-btn_sm"} onClick={handleWineClick}>
-                Wine
-                  </a>
-
-              <a className={(!showWine ? "active" : "") + " s-menu-btn_sm"} onClick={handleCocktailsBeerClick}>
-                Cocktails & Beer
-                  </a>
+              <a className={(showWine ? "active" : "")} onClick={handleWineClick}> Wine </a>
+              <a className={(showBeerMenu ? "active" : "")} onClick={handleCocktailsBeerClick}> Cocktails & Beer </a>
             </Fade>
           </div>
-          <div id="menu-wrapper" className={"s-menu__wrapper"}>
-            <div>
-              <Fade collapse when={showFood}>
-                <Paper className={"s-menu__paper "} elevation={3}>
-                  <FoodMenu />
-                </Paper>
-              </Fade>
-            </div>
-
-            <div>
-              <Fade collapse when={!showFood && showWine} >
-                <Paper className={"s-menu__paper "} elevation={3}>
-                  <WineMenu />
-                </Paper>
-              </Fade>
-            </div>
-            <div>
-              <Fade collapse when={!showFood && !showWine} >
-                <Paper className={"s-menu__paper "} elevation={3}>
-                  <DrinkMenu />
-                </Paper>
-              </Fade>
-
-            </div>
-
-
+        </div>
+        
+        <>
+          <div className={"s-menu__wrapper "  + (!showWineMenu ? 'd-none' : '')}>
+            <Fade collapse when={showWineMenu} >
+              <Paper className={"s-menu__paper "} elevation={3}>
+                <WineMenu />
+              </Paper>
+            </Fade>
           </div>
-        </article>
+          <div className={"s-menu__wrapper " + (!showBeerMenu ? 'd-none' : '') }>
+            <Fade collapse when={showBeerMenu} >
+              <Paper className={"s-menu__paper "} elevation={3}>
+                <DrinkMenu />
+              </Paper>
+            </Fade>
+          </div>
+          <div className={"s-menu__wrapper " + (!showFood ? 'd-none' : '')}>
+            <Fade collapse when={showFood}>
+              <Paper className={"s-menu__paper "} elevation={3}>
+                <FoodMenu />
+              </Paper>
+            </Fade>
+          </div>
+        </>
+
       </div>
     </section >
 
@@ -111,3 +96,6 @@ const useStyles = makeStyles((theme) => ({
 }))
 
 export default Menu
+
+
+

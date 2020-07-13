@@ -19,6 +19,8 @@ const UpdateContact = () => {
         setEmail(response.body.email)
         setPhone(response.body.tel)
       }
+    }).catch(err => {
+      console.error(err)
     })
   }, [])
 

@@ -25,7 +25,7 @@ const DrinkMenu = () => {
   return (
     <div>
       {wine ?
-          <div id="wine-menu">
+          <>
             <div className={classes.header}>
               <h2 className={classes.title}>Wine</h2>
               <p className={classes.title}>5oz / 90z / Bottle</p>
@@ -44,7 +44,7 @@ const DrinkMenu = () => {
                 )
               }
             })}
-          </div>
+          </>
 
           :
           <></>

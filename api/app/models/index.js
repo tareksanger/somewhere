@@ -15,7 +15,7 @@ db.ROLES = ["user", "admin", "moderator"];
 
 db.contact = require("./contact.model")
 db.address = require("./address.model")
-
+db.about = require("./about.model")
 
 db.foodItem = require("./foodItem.model");
 db.foodCategory = require("./foodCategory.model")

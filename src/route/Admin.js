@@ -6,7 +6,7 @@ import {
     Redirect
 } from 'react-router-dom'
 import PrivateRoute from './PrivateRoute'
-import {  Login,Dashboard,  FoodItems, DrinkItems, Beer, Wine } from '../pages'
+import {  Login,Dashboard,  FoodItems, DrinkItems, Beer, Wine, UpdateAbout } from '../pages'
 import { useAuth } from '../context/AuthContext'
 
 import { makeStyles } from '@material-ui/core/styles';
@@ -32,6 +32,8 @@ const Admin = (props) => {
                     {isAuthenticated ? <div className={classes.toolbar} /> : null}
                     <Switch>
                         <PrivateRoute exact path={path} component={Dashboard} />
+                        <PrivateRoute path={path + '/about'} component={UpdateAbout} />
+
                         {/* <PrivateRoute path={path + '/about'} component={FoodItems} /> */}
                         {/* <PrivateRoute path={path + '/contact'} component={FoodItems} /> */}
                         <PrivateRoute path={path + '/food'} component={FoodItems} />

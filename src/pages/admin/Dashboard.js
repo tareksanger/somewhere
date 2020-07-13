@@ -6,15 +6,15 @@ import { client } from '../../utils/api-helper'
 
 const Dashboard = () => {
     // const [settings, setSettings] = useState({})
-    const [maintenance, setMaintenance] = useState(false)
+    const [maintenance, setMaintenance] = useState(null)
     // const [about, setAbout] = useState({})
-    let classes = useStyles()
+    const classes = useStyles()
 
     useEffect(() => {
 
         client('/api/admin/dashboard').then(response => {
             // setSettings(response.body.settings)
-            setMaintenance(response.body.setting.maintenance)
+            setMaintenance(response.body.settings.maintenance)
         })
             .catch(err => {
                 console.error(err)
@@ -62,10 +62,15 @@ const Dashboard = () => {
 
                     <Grid item xs={12}>
                         <FormGroup>
+                            {maintenance === null ? 
+                             <></>
+                            :
                             <FormControlLabel
                                 control={<Switch checked={maintenance} onChange={handleMaintenanceSwitch} />}
                                 label="Maintenance"
                             />
+                            }
+                            
                         </FormGroup>
                     </Grid>
 

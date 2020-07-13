@@ -13,7 +13,7 @@ const DrinkItems = () => {
         { title: 'ID', field: '_id', hidden: true },
         { title: 'Name', field: 'name' },
         // { title: 'Type', field: 'type', initialEditValue: ' '},
-        { title: 'Description', field: 'description', initialEditValue: ' ' },
+        { title: 'Description', field: 'description'},
         { title: 'Price', field: 'price', type: 'currency' }
       ]}>
       <DrinkContainer />

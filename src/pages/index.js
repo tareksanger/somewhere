@@ -7,6 +7,8 @@ import Loading from './Loading'
 import Login from './Login'
 
 import Dashboard from './admin/Dashboard'
+import UpdateAbout from './admin/UpdateAbout'
+
 import FoodItems from './admin/FoodItems'
 import DrinkItems from './admin/DrinkItems'
 import Beer from './admin/Beer'
@@ -21,6 +23,7 @@ export {
     Login,
     
     Dashboard,
+    UpdateAbout,
     
     FoodItems,
     DrinkItems,

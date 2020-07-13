@@ -62,7 +62,7 @@ const AdminDrawer = ({ path, url, ...props }) => {
     <div id='admin-drawer'>
       <div className={classes.toolbar} />
       <List>
-        {['dashboard'].map((text, index) => (
+        {['dashboard', 'about'].map((text, index) => (
           createDrawerLink(text)
         ))}
       </List>

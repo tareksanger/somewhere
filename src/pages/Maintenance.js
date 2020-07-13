@@ -1,5 +1,5 @@
 import React from 'react'
-import { Container, makeStyles, Typography, Paper } from '@material-ui/core'
+import { makeStyles, Typography, Paper } from '@material-ui/core'
 
 
 const Maintenance = () => {
@@ -8,17 +8,11 @@ const Maintenance = () => {
   return (
     <div className='maintenance' style={{ height: window.screen.height }}>
       <Paper className={classes.paper} elevation={3}>
-
-        <Container>
           <Typography>
             <h1>We're currently under Maintenance.</h1>
           </Typography>
-          <p>Sorry for the inconvenience! We'll be back soon!</p> 
-        </Container>
-
+          <Typography>Sorry for the inconvenience! We'll be back soon!</Typography>
       </Paper>
-
-
     </div>
   )
 }
@@ -32,8 +26,9 @@ const useStyles = makeStyles(theme => ({
     color: '#d4d3ce'
   },
   paper: {
+    maxHeight: 300,
     margin: theme.spacing(5),
-    padding: theme.spacing(5),
+    padding: theme.spacing(3),
     textAlign: 'center',
   }
 
