@@ -44,7 +44,7 @@ db.mongoose
     useNewUrlParser: true,
     useUnifiedTopology: true
   })
-  // .connect(`mongodb://${dbConfig.HOST}:${dbConfig.PORT}/${dbConfig.DB}?retryWrites=true&w=majority`, {
+  // .connect(`mongodb://${dbConfig.HOST}:${dbConfig.PORT}/${dbConfig.DB}`, {
   //   useNewUrlParser: true,
   //   useUnifiedTopology: true
   // })
