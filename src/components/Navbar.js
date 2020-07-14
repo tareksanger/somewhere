@@ -40,7 +40,7 @@ export default function Navbar({ data, sections = [], ...props }) {
         <header className="s-header">
 
             <div className="header-content">
-                <nav className="row header-nav-wrap">
+                <nav className="header-nav-wrap">
                     <ul className="header-nav">
                         <li><Link to='hero' spy={true} smooth={true} onClick={navbutton}>Home</Link></li>
                         {createLinks(sections)}
