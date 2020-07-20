@@ -1,5 +1,6 @@
 import React, { createContext, useState, useContext } from 'react';
 import { client, refresh } from '../utils/api-helper';
+import {orderCategories } from '../utils/helpers'
 
 const MenuDataContext = createContext();
 
@@ -9,7 +10,7 @@ const URL = '/api/admin'
 
 
 const MenuDataProvider = ({ url, tableColumns, children, ...props }) => {
-  const [menuData, setMenuData] = useState({})
+  const [menuData, setMenuData] = useState([])
   const [columns, setColumns] = useState(tableColumns)
 
   const getMenuData = () => {
@@ -18,7 +19,7 @@ const MenuDataProvider = ({ url, tableColumns, children, ...props }) => {
       if (response.body) {
         if (!response.body.msg) {
           // console.log(response.body)
-          setMenuData(response.body)
+          setMenuData(orderCategories(response.body))
         } else alert(response.body.msg)
       }
     })
@@ -28,16 +29,18 @@ const MenuDataProvider = ({ url, tableColumns, children, ...props }) => {
     })
   }
 
-  const addMenuItem = (resolve, reject, category, newData) => {
-    let data = { ...newData, category }
+  const addMenuItem = (resolve, reject, name, newData) => {
+    let data = { ...newData, category: name }
     console.log(data)
     if (!newData.description) data.description = ''
     return client(URL + url, { data })
     .then(response => {
       if (response.status === 200) {
-        let items = [...menuData[category].items, response.body]
-        menuData[category].items = items
-        setMenuData({ ...menuData })
+        let newMenuData = menuData
+
+        newMenuData = newMenuData.map((c) => (c.name === name) ? {...c, items: [...c.items, response.body ]}: c)
+
+        setMenuData(newMenuData)
       }
       else alert(response.body.msg)
       resolve()
@@ -48,17 +51,17 @@ const MenuDataProvider = ({ url, tableColumns, children, ...props }) => {
     })
   }
 
-  const updateMenuItem = (resolve, reject, category, oldData, newData = null) => {
+  const updateMenuItem = (resolve, reject, name, oldData, newData = null) => {
     const config = { method: newData ? 'POST' : 'DELETE' }
     return client(URL + url + '/' + oldData._id, { data: newData, config }).then(response => {
       if (response.status === 200) {
-        let items = menuData[category].items.filter((item) => item.name !== oldData.name)
-
-        if (newData) items.push(newData)
-
-        menuData[category].items = items
-        setMenuData({ ...menuData })
+        
+        let newMenuData = menuData
+        newMenuData = newMenuData.map((c) => (c.name === name) ? {...c, items: c.items.map((item)=> item._id === oldData._id ? newData : item)} : c)
+        setMenuData(newMenuData)
+      
       } else if (response.body.msg) alert(response.body.msg)
+     
       resolve()
     })
     .catch(err => {
@@ -69,16 +72,15 @@ const MenuDataProvider = ({ url, tableColumns, children, ...props }) => {
   }
 
 
-  const createCategory = (category) => {
+  const createCategory = (name) => {
     let config = { method: 'PUT' }
-    let data = { 'name': category.toLowerCase() }
+    let data = { 'name': name.toLowerCase(), order: menuData.length + 1 }
     return client(URL + url + '/category', {data, config }).then(response => {
       if (response.status === 200) {
-        menuData[category] = {
-          ...response.body.category,
-          items: []
-        }
-        setMenuData({ ...menuData })
+        let newData = menuData
+
+        newData.push(response.body.category)
+        setMenuData(newData)
 
       } else if (response.body.msg) alert(response.body.msg)
     })
@@ -98,9 +100,25 @@ const MenuDataProvider = ({ url, tableColumns, children, ...props }) => {
   }
 
 
+  const handleShowSwitch = (category) => {
+    let config = { method: 'PUT'}
+    let data = {show: !category.show}
+    return client(`${URL}${url}/category/switch/${category._id}`, {data, config}).then(response => {
+      if(response.status === 200){
+        let newMenuData = menuData
+
+        newMenuData = newMenuData.map((c) => c._id === category._id ? {...c, show: !c.show} : c)
+
+        setMenuData(newMenuData)
+
+      }
+    })
+
+  }
+
 
   return (
-    <MenuDataContext.Provider value={{ menuData, getMenuData, columns, setColumns, addMenuItem, updateMenuItem, createCategory, deleteCategory }}>
+    <MenuDataContext.Provider value={{ menuData, getMenuData, columns, setColumns, addMenuItem, updateMenuItem, createCategory, deleteCategory, handleShowSwitch }}>
       {children}
     </MenuDataContext.Provider>
   );

@@ -8,6 +8,8 @@ module.exports = function(app) {
   app.put("/api/admin/food/category",[authJwt.verifyToken], controller.createCategory)
 
   app.delete("/api/admin/food/category/:id", [authJwt.verifyToken], controller.deteteCategory)
+  
+  app.put('/api/admin/beer/food/switch/:id', [authJwt.verifyToken], controller.showCategory)
 
   // Food Items
 

@@ -42,14 +42,18 @@ exports.deteteCategory = (req, res) => {
 exports.getCategorys = (req, res) => {
   WineCategory.find({})
     .populate('items', '-__v')
-    .exec((err, categorys) => {
+    .exec((err, categories) => {
       if (err) return res.status(500).send({ msg: err });
-
-      let data = {}
-      for (let c of categorys) data[c.name] = c
-
-      return res.send(data)
+      return res.send(categories)
     })
+}
+
+exports.showCategory = (req, res) => {
+  let newData = {show: req.body.show}
+  WineCategory.findOneAndUpdate({_id: req.params.id}, newData, (err) => {
+    if (err) return res.status(500).send({ msg: err })
+    return res.send({ msg: "Switch changed." })
+  })
 }
 
 

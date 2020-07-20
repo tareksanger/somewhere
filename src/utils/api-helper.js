@@ -33,11 +33,10 @@ const client = async (subdir, { data, config } = {}) => {
     
     })
     .then(data => {
-      if(!data || !data.body) alert('something is wrong!')
+      if(!data || !data.body) alert('Something is wrong!')
 
       if(data.body.logout) logout()
 
-      console.log(data)
       return data
     })
     .catch((error) => {

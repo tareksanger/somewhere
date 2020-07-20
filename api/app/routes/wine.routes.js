@@ -11,6 +11,8 @@ module.exports = (app) => {
 
   app.delete("/api/admin/wine/category/:id", [authJwt.verifyToken], controller.deteteCategory)
 
+  app.put('/api/admin/wine/category/switch/:id', [authJwt.verifyToken], controller.showCategory)
+
   // Food Items
 
   app.post("/api/admin/wine", [authJwt.verifyToken], controller.createWine)

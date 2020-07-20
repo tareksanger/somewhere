@@ -77,6 +77,7 @@ function App() {
     window.addEventListener('resize', handleResize)
   }, [])
 
+  $('#hero').css({ 'height': $(window).height() });
 
   return (
     <div className="App">
@@ -92,7 +93,7 @@ function App() {
       <Route path="*">
           <Loading/>
         </Route>
-      {/* <Route component={FourZeroFour}/> */}
+
     </Switch>
 
     </div>

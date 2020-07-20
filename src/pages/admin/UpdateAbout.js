@@ -26,25 +26,25 @@ const UpdateAbout = () => {
 
 
   const handleUpdateAbout = () => {
-      let data = { text, show }
-      let config = { method: "POST" }
-      client('/api/admin/about', { data, config })
-        .catch(err => {
-          console.error(err)
-        })
+    let data = { text, show }
+    let config = { method: "POST" }
+    client('/api/admin/about', { data, config })
+      .catch(err => {
+        console.error(err)
+      })
   }
 
   const handleAboutSwitch = () => {
-    let data = { show: show }
+    let data = { show: !show }
     let config = { method: "POST" }
 
     client('/api/admin/about/switch', { data, config })
-    .then(response => {
-      if(response.status === 200) setShow(!show)
-    })
-    .catch(err => {
-      console.error(err)
-    })
+      .then(response => {
+        if (response.status === 200) setShow(!show)
+      })
+      .catch(err => {
+        console.error(err)
+      })
 
   }
 
@@ -55,7 +55,7 @@ const UpdateAbout = () => {
     <Container>
       <Typography variant='h3'>About</Typography>
 
-      <Paper className={classes.paper}  elevation={3}>
+      <Paper className={classes.paper} elevation={3}>
         <TextareaAutosize
           className={classes.textArea}
           rows='10'
@@ -67,16 +67,16 @@ const UpdateAbout = () => {
       </Paper>
       <Button variant="contained" color="primary" className={classes.btn} onClick={handleUpdateAbout}>Update</Button>
       <FormGroup>
-                            {show === null ? 
-                             <></>
-                            :
-                            <FormControlLabel
-                                control={<Switch checked={show} onChange={handleAboutSwitch} />}
-                                label={(show? 'Hide': 'Show')+ " About Section"}
-                            />
-                            }
-                            
-                        </FormGroup>
+        {show === null ?
+          <></>
+          :
+          <FormControlLabel
+            control={<Switch checked={show} onChange={handleAboutSwitch} />}
+            label={(show ? 'Hide' : 'Show') + " About Section"}
+          />
+        }
+
+      </FormGroup>
 
     </Container>
   )

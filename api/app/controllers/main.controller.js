@@ -6,8 +6,6 @@ const WineCategory = db.wineCategory
 const DrinkCategory = db.drinkCategory
 const About = db.about
 
-
-
 exports.getHomeData = (req, res) => {
   Contact.findOne({}).populate('address', '-__v').exec((err, contact) => {
     if (err) return res.status(500).send({ msg: err })
@@ -26,11 +24,8 @@ exports.getHomeData = (req, res) => {
 
 
 exports.getFoodMenu = (req, res) => {
-  FoodCategory.find({}).populate('items', '-__v').exec((err, foodCategories) => {
-    if (err) return res.status(500).send({ msg: err })
+  FoodCategory.find({}).populate('items', '-__v').exec((err, food) => {
 
-    let food = {}
-    for (let c of foodCategories) food[c.name] = c
     return res.send(food)
 
   })
@@ -44,9 +39,12 @@ exports.getDrinks = (req, res) => {
 
     DrinkCategory.find({}).populate('items', '-__v').exec((err, drinks) => {
       if (err) return res.status(500).send({ msg: err })
+
+
+    
       const data = {
         beer,
-        drinks,
+        drinks
       }
       return res.send(data)
     })
@@ -62,6 +60,5 @@ exports.getWine = (req, res) => {
     return res.send(wine)
   })
 }
-
 
 

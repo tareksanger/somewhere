@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { makeStyles, Accordion, AccordionSummary, AccordionDetails, IconButton } from '@material-ui/core'
+import { makeStyles, Accordion, AccordionSummary, AccordionDetails, IconButton, FormControlLabel, FormGroup, Switch } from '@material-ui/core'
 import MaterialTable from 'material-table';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import DeleteIcon from '@material-ui/icons/Delete';
@@ -10,12 +10,10 @@ import { toTitleCase } from '../../utils/stringUtils'
 
 
 
-const MenuItemTable = ({ title, category_id }) => {
-  const { addMenuItem, menuData, updateMenuItem, columns, deleteCategory } = useMenuData()
-  const [_id] = useState(category_id)
-  const [category] = useState(title)
-
+const MenuItemTable = ({ category }) => {
   const classes = useStyles()
+  const { addMenuItem, menuData, updateMenuItem, columns, deleteCategory, handleShowSwitch } = useMenuData()
+
 
   return (
 
@@ -28,7 +26,7 @@ const MenuItemTable = ({ title, category_id }) => {
           id="panel1a-header"
         >
 
-          <h2> {toTitleCase(category)} </h2>
+          <h2> {toTitleCase(category.name)} </h2>
 
         </AccordionSummary>
 
@@ -39,12 +37,11 @@ const MenuItemTable = ({ title, category_id }) => {
             icons={tableIcons}
             title={''}
             columns={columns}
-            data={menuData[category].items}
+            data={category.items}
             options={{
               actionsColumnIndex: -1,
               rowStyle: {
                 backgroundColor: '#D3D3D3'
-
               }
             }}
 
@@ -55,24 +52,24 @@ const MenuItemTable = ({ title, category_id }) => {
                   if (!newData.name || newData.name === '') {
                     alert('There must be a name value.')
                     reject()
-                  } else addMenuItem(resolve, reject, category, newData,)
+                  } else addMenuItem(resolve, reject, category.name, newData,)
                 }),
               onRowUpdate: (newData, oldData) =>
                 new Promise((resolve, reject) => {
-                  
+
                   if (!newData.name || newData.name === '') {
                     alert('There must be a name value.')
                     reject()
-                  
+
                   } else {
-                    
-                    updateMenuItem(resolve, reject, category, oldData, newData)
-                  
+
+                    updateMenuItem(resolve, reject, category.name, oldData, newData)
+
                   }
                 }),
               onRowDelete: (oldData) =>
                 new Promise((resolve, reject) => {
-                  updateMenuItem(resolve, reject, category, oldData)
+                  updateMenuItem(resolve, reject, category.name, oldData)
                 })
             }}
 
@@ -82,11 +79,18 @@ const MenuItemTable = ({ title, category_id }) => {
 
         </AccordionDetails>
         <AccordionDetails>
+          <FormGroup>
+              <FormControlLabel
+                control={<Switch checked={category.show} onChange={() => handleShowSwitch(category)} />}
+                label={(category.show ? 'Hide' : 'Show') + " About Section"}
+              />
+          </FormGroup>
+
           <IconButton onClick={async () => {
-            let r = window.confirm("Are you sure you want to delete " + category.toUpperCase() + " and all of it contents?")
+            let r = window.confirm("Are you sure you want to delete " + category.name.toUpperCase() + " and all of it contents?")
 
             if (r) {
-              deleteCategory(_id)
+              deleteCategory(category._id)
             }
 
           }}>

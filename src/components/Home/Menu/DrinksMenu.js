@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { makeStyles } from '@material-ui/core'
 import { client } from '../../../utils/api-helper'
+import { orderCategories } from '../../../utils/helpers'
 
 import MenuItem from './MenuItem'
 
@@ -13,7 +14,12 @@ const DrinkMenu = () => {
     if (drinks.length === 0) {
       client('/api/home/drinks')
         .then(response => {
-          if (response.body) setDrinks(response.body)
+          if (response.body) {
+            let beer = orderCategories(response.body.beer)
+            let drinks = orderCategories(response.body.drinks)
+             setDrinks({ beer, drinks })
+
+          }
         })
         .catch(err => {
           console.log(err)
@@ -22,10 +28,6 @@ const DrinkMenu = () => {
 
 
   }, [])
-
-  useEffect(() => {
-    console.log(drinks)
-  }, [drinks])
 
   return (
     <div>

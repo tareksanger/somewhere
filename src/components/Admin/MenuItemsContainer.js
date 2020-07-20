@@ -29,11 +29,7 @@ const MenuItemContainer = (tableColumns= []) => {
       {menuData ?
 
         <>
-          {Object.keys(menuData).map((key, index) => {
-          console.log(menuData[key]._id)
-          return (<MenuItemTable key={index} title={key} category_id={menuData[key]._id}/>)
-          
-          })}
+          {menuData.map((item, index) =>  (<MenuItemTable key={index} category={item}/>))}
         </>
 
         :
