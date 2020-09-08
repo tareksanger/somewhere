@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link } from 'react-scroll'
+import { Button } from '@material-ui/core'
 import $ from 'jquery'
 // import logo from '../logo.svg'
 // import RubberBand from 'react-reveal/RubberBand';
@@ -44,7 +45,7 @@ export default function Navbar({ data, sections = [], ...props }) {
                     <ul className="header-nav">
                         <li><Link to='hero' spy={true} smooth={true} onClick={navbutton}>Home</Link></li>
                         {createLinks(sections)}
-                        {/* <li><a href={"mailto:" + data.email} title="Contact us">Say Hello</a></li> */}
+                        <li><Button variant="contained" ><a href={'https://www.opentable.com/r/somewhere-dine-bar-reservations-ottawa?restref=1081081&lang=en-US&ot_source=Restaurant%20website'} title="Make a Reservation">Make a Reservation</a></Button></li>
                     </ul>
                 </nav>
 

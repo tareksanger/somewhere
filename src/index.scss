@@ -155,10 +155,15 @@ html {
       line-height: 4.4rem !important;
     }
 
-    .header-nav a {
-      color: $essential-gray;
-
+    .header-nav {
+      a {
+        color: $essential-gray;
+      }
+      li:last-child a {
+        color: $midnight-Blue;
+      }
     }
+
 
 
   }
@@ -225,10 +230,15 @@ html {
   margin: 0;
   cursor: pointer;
 
+
   li {
     display: inline-block;
     padding-left: 0;
     margin: 0 1rem;
+
+    &:last-child {
+      float: right;
+    }
   }
 
   a {
@@ -406,6 +416,12 @@ html {
     position: absolute;
     top: -2rem;
     left: 0;
+
+    .header-nav {
+      li:last-child {
+        float: none;
+      }
+    }
 
 
     .btn {
@@ -1110,7 +1126,8 @@ html {
     justify-content: center;
     text-align: center;
     margin-top: 8rem;
-    span { 
+
+    span {
       text-align: center;
     }
   }
