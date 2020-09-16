@@ -32,7 +32,7 @@
     "typescript": "^3.9.6"
   },
   "scripts": {
-    "server": "nodemon server.js",
+    "server": "nodemon api/server.js",
     "start": "node api/server.js",
     "start-client": "react-scripts start",
     "heroku-postbuild": "NPM_CONFIG_PRODUCTION=false npm install && npm run build",

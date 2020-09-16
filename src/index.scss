@@ -418,8 +418,12 @@ html {
     left: 0;
 
     .header-nav {
+      button a {
+        color: $midnight-Blue !important;
+      }
       li:last-child {
         float: none;
+
       }
     }
 
