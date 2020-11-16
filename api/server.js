@@ -40,7 +40,7 @@ const User = db.user
 const About = db.about;
 
 db.mongoose
-  .connect(`mongodb://tarek:yA752818@167.99.183.80:27017?authSource=admin`, {
+  .connect(`mongodb://167.99.183.80:27017`, {
     useNewUrlParser: true,
     useUnifiedTopology: true
   })
