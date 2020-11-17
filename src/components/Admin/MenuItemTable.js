@@ -82,7 +82,7 @@ const MenuItemTable = ({ category }) => {
           <FormGroup>
               <FormControlLabel
                 control={<Switch checked={category.show} onChange={() => handleShowSwitch(category)} />}
-                label={(category.show ? 'Hide' : 'Show') + " About Section"}
+                label={(category.show ? 'Hide' : 'Show')}
               />
           </FormGroup>
 
